@@ -1,0 +1,26 @@
+.layout {
+  position: relative;
+
+  .sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    cursor: pointer;
+    left: calc(var(--sidebar-closed-width) + 0.75rem);
+
+    &.open {
+      left: calc(var(--sidebar-open-width) - 2rem)
+    }
+  }
+
+  .main-content {
+    min-height: var(--main-content-height);
+  }
+
+  .sidebar-open {
+    width: var(--sidebar-open-width);
+  }
+
+  .sidebar-closed {
+    width: var(--sidebar-closed-width);
+  }
+}

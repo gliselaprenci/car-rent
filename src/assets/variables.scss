@@ -1,0 +1,15 @@
+:root {
+  // Colors
+  --white: #fff;
+  --primary: #222831;
+  --secondary: #393E46;
+  --accent: #00ADB5;
+  --text: #EEEEEE;
+
+  // Size Values
+  --sidebar-open-width: 20rem;
+  --sidebar-closed-width: 3.5rem;
+  --header-height: 7vh;
+  --footer-height: 5vh;
+  --main-content-height: calc(100vh - var(--header-height) - var(--footer-height));
+}

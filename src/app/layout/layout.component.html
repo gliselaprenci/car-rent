@@ -1,0 +1,19 @@
+<div class='layout bg-primary-page min-vh-100'>
+  <span class='sidebar-toggle' [class.open]="sidebarOpen()" (click)="toggleSidebar()">
+    <fa-icon [icon]="sidebarOpen() ? faAngleLeft : faAngleRight" size="xl" class="icon-primary"></fa-icon>
+  </span>
+  <div class='d-flex'>
+    <div [ngClass]="sidebarOpen() ? 'sidebar-open' : 'sidebar-closed'">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="px-0 w-100">
+      <div>
+        <app-navbar />
+      </div>
+      <div class='main-content container-fluid'>
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

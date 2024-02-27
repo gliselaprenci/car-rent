@@ -1,0 +1,11 @@
+.icon-primary {
+  path {
+    fill: var(--primary);
+  }
+
+  :hover {
+    path {
+      fill: var(--accent);
+    }
+  }
+}
