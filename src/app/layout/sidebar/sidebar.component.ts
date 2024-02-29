@@ -2,7 +2,11 @@ import { Component, inject, Signal } from '@angular/core';
 import { NgClass, NgForOf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { environment } from '../../../environments/environment';
-import { faCar, faCircleNodes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCar,
+  faCircleNodes,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { SidebarItem } from './sidebar.types';
 import { LayoutService } from '../layout.service';
 import { AppRoutes } from '../../app.routes';
@@ -43,6 +47,12 @@ export class SidebarComponent {
       icon: faCar,
       label: 'Cars',
       route: AppRoutes.Cars,
+    },
+    {
+      id: 2,
+      icon: faUser,
+      label: 'Customers',
+      route: AppRoutes.Customers,
     },
   ];
   protected readonly environment = environment;

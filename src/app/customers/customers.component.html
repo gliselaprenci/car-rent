@@ -1,0 +1,24 @@
+<h1 class="mb-3">Customers</h1>
+<app-customers-form></app-customers-form>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Address</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (customer of customers(); track customer.customer_id) {
+      <tr>
+        <td>{{ customer.customer_id }}</td>
+        <td>{{ customer.firstName }}</td>
+        <td>{{ customer.lastName }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.address }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
