@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { BranchesFormComponent } from './branches-form/branches-form.component';
 import { BranchesService } from './branches.service';
 import { BranchEntity } from './branches.types';
@@ -10,11 +10,7 @@ import { BranchEntity } from './branches.types';
   templateUrl: './branches.component.html',
   styleUrl: './branches.component.scss',
 })
-export class BranchesComponent implements OnInit {
+export class BranchesComponent {
   #branchesService: BranchesService = inject(BranchesService);
   branches: Signal<BranchEntity[]> = this.#branchesService.getBranches();
-
-  ngOnInit(): void {
-    this.#branchesService.fetchBranches();
-  }
 }

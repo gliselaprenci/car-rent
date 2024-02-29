@@ -14,6 +14,7 @@ import { BranchEntity } from './branches.types';
 export class BranchesService {
   #httpClient: HttpClient = inject(HttpClient);
   branches: WritableSignal<BranchEntity[]> = signal<BranchEntity[]>(null);
+  selectedBranchId: WritableSignal<number> = signal<number>(null);
 
   fetchBranches() {
     this.#httpClient.get('/branches/getBranches').subscribe({
@@ -31,5 +32,13 @@ export class BranchesService {
 
   getBranches(): Signal<BranchEntity[]> {
     return this.branches.asReadonly();
+  }
+
+  selectBranchId(branchId: number) {
+    this.selectedBranchId.set(branchId);
+  }
+
+  getSelectedBranchId(): Signal<number> {
+    return this.selectedBranchId.asReadonly();
   }
 }

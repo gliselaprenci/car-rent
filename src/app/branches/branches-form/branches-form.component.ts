@@ -4,7 +4,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  ReactiveFormsModule,
+  ReactiveFormsModule, Validators
 } from '@angular/forms';
 
 @Component({
@@ -19,8 +19,8 @@ export class BranchesFormComponent implements OnInit {
   #formBuilder: FormBuilder = inject(FormBuilder);
 
   branchForm: FormGroup = this.#formBuilder.group({
-    address: [''],
-    city: [''],
+    address: ['', [Validators.required]],
+    city: ['', [Validators.required]],
   });
 
   ngOnInit() {
