@@ -12,6 +12,12 @@
       <div class="accordion-body">
         <form [formGroup]="branchForm">
           <div class="d-flex gap-5 align-items-center">
+            @if (customerEntity) {
+              <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" class="form-control" id="id" disabled formControlName="id">
+              </div>
+            }
             <div class="mb-3">
               <label for="firstName" class="form-label">First Name</label>
               <input type="text" class="form-control" id="firstName" formControlName="firstName">

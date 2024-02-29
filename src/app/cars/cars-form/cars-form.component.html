@@ -12,6 +12,12 @@
       <div class="accordion-body">
         <form [formGroup]="carForm">
           <div class="d-flex gap-5 align-items-center">
+            @if (carEntity) {
+              <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" class="form-control" id="id" disabled formControlName="id">
+              </div>
+            }
             <div class="mb-3">
               <label for="brand" class="form-label">Brand</label>
               <input type="text" class="form-control" id="brand" formControlName="brand">
