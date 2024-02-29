@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 export enum AppRoutes {
   Home = '',
   Table = 'table',
+  Branches = 'branches',
 }
 
 export const routes: Routes = [
@@ -17,9 +18,9 @@ export const routes: Routes = [
           import('./home/home.component').then((c) => c.HomeComponent),
       },
       {
-        path: AppRoutes.Table,
+        path: AppRoutes.Branches,
         loadComponent: () =>
-          import('./home/home.component').then((c) => c.HomeComponent),
+          import('./branches/branches.component').then((c) => c.BranchesComponent),
       },
     ],
   },

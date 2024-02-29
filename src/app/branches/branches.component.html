@@ -1,0 +1,20 @@
+<h1 class="mb-3">Branches</h1>
+<app-branches-form></app-branches-form>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Address</th>
+    <th>City</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (branch of branches(); track branch.id) {
+      <tr>
+        <td>{{ branch.id }}</td>
+        <td>{{ branch.address }}</td>
+        <td>{{ branch.city }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

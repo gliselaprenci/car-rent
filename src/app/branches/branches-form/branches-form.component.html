@@ -1,0 +1,33 @@
+<div class="accordion mb-3" id="branchesAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="branchLabel">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseBranches"
+              aria-expanded="false" aria-controls="collapseBranches">
+        {{ !!branchEntity ? 'Update Branch' : 'Create Branch' }}
+      </button>
+    </h2>
+    <div id="collapseBranches" class="accordion-collapse collapse" aria-labelledby="branchLabel"
+         data-bs-parent="#branchesAccordion">
+      <div class="accordion-body">
+        <form [formGroup]="branchForm">
+          <div class="d-flex gap-5 align-items-center">
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="email" class="form-control" id="address" formControlName="address">
+            </div>
+            <div class="mb-3">
+              <label for="city" class="form-label">City</label>
+              <input type="email" class="form-control" id="city" formControlName="city">
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">
+                {{ !!branchEntity ? 'Update Branch' : 'Create Branch' }}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
