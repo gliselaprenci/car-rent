@@ -1,5 +1,4 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { BranchEntity } from '../../branches/branches.types';
 import {
   AbstractControl,
   FormBuilder,
