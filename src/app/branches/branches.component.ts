@@ -13,4 +13,9 @@ import { BranchEntity } from './branches.types';
 export class BranchesComponent {
   #branchesService: BranchesService = inject(BranchesService);
   branches: Signal<BranchEntity[]> = this.#branchesService.getBranches();
+  branchEntity: BranchEntity;
+
+  setBranchEntity(branchEntity: BranchEntity): void {
+    this.branchEntity = branchEntity;
+  }
 }

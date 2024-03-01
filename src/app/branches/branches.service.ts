@@ -46,6 +46,36 @@ export class BranchesService {
       });
   }
 
+  createBranch(branchEntity: BranchEntity) {
+    this.#httpClient.post('/branches/createBranches', branchEntity).subscribe({
+      next: () => {
+        this.#toastrService.success('Branch created successfully');
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      },
+      complete: () => {
+        this.fetchBranches();
+      },
+    });
+  }
+
+  updateBranch(id: number, branchEntity: BranchEntity) {
+    this.#httpClient
+      .put(`/branches/updateBranches/${id}`, branchEntity)
+      .subscribe({
+        next: () => {
+          this.#toastrService.success('Branch updated successfully');
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        },
+        complete: () => {
+          this.fetchBranches();
+        },
+      });
+  }
+
   getBranches(): Signal<BranchEntity[]> {
     return this.#branches.asReadonly();
   }

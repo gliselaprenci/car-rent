@@ -10,12 +10,12 @@
     <div id="collapseBranches" class="accordion-collapse collapse" aria-labelledby="branchLabel"
          data-bs-parent="#branchesAccordion">
       <div class="accordion-body">
-        <form [formGroup]="branchForm">
+        <form [formGroup]="branchForm" (submit)="handleBranchFormSubmit()">
           <div class="d-flex gap-5 align-items-center">
             @if (branchEntity) {
               <div class="mb-3">
-                <label for="id" class="form-label">ID</label>
-                <input type="number" class="form-control" id="id" disabled formControlName="id">
+                <label for="branch_id" class="form-label">ID</label>
+                <input type="number" class="form-control" id="branch_id" formControlName="branch_id">
               </div>
             }
             <div class="mb-3">
@@ -27,9 +27,21 @@
               <input type="text" class="form-control" id="city" formControlName="city">
             </div>
             <div class="mb-3">
+              <label for="status" class="form-label">Select Rental</label>
+              <select class="form-select" id="status" formControlName="rental_id">
+                <option [value]="null">-</option>
+                @for (rental of rentals(); track rental.rental_id) {
+                  <option [value]="rental.rental_id">{{ rental.name + " " + rental.owner }}</option>
+                }
+              </select>
+            </div>
+            <div class="mb-3">
               <button type="submit" class="btn btn-primary">
                 {{ !!branchEntity ? 'Update Branch' : 'Create Branch' }}
               </button>
+              @if (branchEntity) {
+                <button class="btn btn-secondary" (click)="clearBranchEntity()">Clear Form</button>
+              }
             </div>
           </div>
         </form>

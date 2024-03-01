@@ -26,7 +26,7 @@ import { UtilityService } from '../../utility/utility.service';
   templateUrl: './rentals-form.component.html',
   styleUrl: './rentals-form.component.scss',
 })
-export class RentalsFormComponent implements OnInit, OnChanges {
+export class RentalsFormComponent implements OnChanges {
   @Input() rentalEntity: RentalEntity;
   #formBuilder: FormBuilder = inject(FormBuilder);
   #rentalsService: RentalsService = inject(RentalsService);
@@ -38,11 +38,6 @@ export class RentalsFormComponent implements OnInit, OnChanges {
     email: ['', [Validators.required, Validators.email]],
     owner: ['', [Validators.required]],
   });
-
-  ngOnInit() {
-    if (this.rentalEntity) {
-    }
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.rentalEntity?.currentValue !== null) {

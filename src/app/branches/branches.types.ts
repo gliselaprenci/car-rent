@@ -1,5 +1,6 @@
 export type BranchEntity = {
-  id?: number,
+  branch_id?: number,
   address: string,
   city: string,
+  rental_id: string,
 }
