@@ -3,12 +3,13 @@
 
   .sidebar-toggle {
     position: fixed;
-    top: 50%;
+    top: 90%;
     cursor: pointer;
-    left: calc(var(--sidebar-closed-width) + 0.75rem);
+    z-index: 999;
+    left: calc(var(--sidebar-closed-width) - 1.5rem);
 
     &.open {
-      left: calc(var(--sidebar-open-width) - 2rem)
+      left: calc(var(--sidebar-open-width) - 4.5rem)
     }
   }
 
