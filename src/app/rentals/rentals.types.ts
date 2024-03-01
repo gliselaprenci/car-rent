@@ -1,5 +1,5 @@
 export type RentalEntity = {
-  id?: number,
+  rental_id?: number,
   name: string,
   email: string,
   owner: string,

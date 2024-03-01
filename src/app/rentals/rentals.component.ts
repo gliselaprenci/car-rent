@@ -14,4 +14,9 @@ import { RentalEntity } from './rentals.types';
 export class RentalsComponent {
   #rentalsService: RentalsService = inject(RentalsService);
   rentals: Signal<RentalEntity[]> = this.#rentalsService.getRentals();
+  rentalEntity: RentalEntity;
+
+  setRentalEntity(rentalEntity: RentalEntity): void {
+    this.rentalEntity = rentalEntity;
+  }
 }

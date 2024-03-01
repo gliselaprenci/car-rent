@@ -1,10 +1,10 @@
 import {
-  computed,
+  effect,
   inject,
   Injectable,
   Signal,
   signal,
-  WritableSignal
+  WritableSignal,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BranchEntity } from './branches.types';
@@ -23,28 +23,27 @@ export class BranchesService {
   #rentalId: Signal<number> = this.#rentalsService.getSelectedRentalId();
 
   constructor() {
-    computed(() => {
+    effect(() => {
       if (!this.#rentalId()) {
         this.#toastrService.error('Select rental on the top left corner');
         return;
       }
 
       this.fetchBranches();
-    })
+    });
   }
 
   fetchBranches() {
-    this.#httpClient.get(`/branches/getBranchByRentalId/${this.#rentalId}`).subscribe({
-      next: (data) => {
-        console.log('Data received:', data);
-      },
-      error: (error) => {
-        console.error('Error:', error);
-      },
-      complete: () => {
-        console.log('Request completed');
-      },
-    });
+    this.#httpClient
+      .get(`/branches/getBranchByRentalId/${this.#rentalId()}`)
+      .subscribe({
+        next: (data) => {
+          console.log('Data received:', data);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        },
+      });
   }
 
   getBranches(): Signal<BranchEntity[]> {

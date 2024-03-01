@@ -1,5 +1,5 @@
 <h1 class="mb-3">Rentals</h1>
-<app-rentals-form></app-rentals-form>
+<app-rentals-form [rentalEntity]="rentalEntity"></app-rentals-form>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -10,9 +10,9 @@
   </tr>
   </thead>
   <tbody>
-    @for (rental of rentals(); track rental.id) {
-      <tr>
-        <td>{{ rental.id }}</td>
+    @for (rental of rentals(); track rental.rental_id) {
+      <tr (click)="setRentalEntity(rental)">
+        <td>{{ rental.rental_id }}</td>
         <td>{{ rental.name }}</td>
         <td>{{ rental.email }}</td>
         <td>{{ rental.owner }}</td>

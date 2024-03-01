@@ -1,34 +1,69 @@
-import { inject, Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  Signal,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RentalEntity } from './rentals.types';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RentalsService {
   #httpClient: HttpClient = inject(HttpClient);
+  #toastrService: ToastrService = inject(ToastrService);
   #rentals: WritableSignal<RentalEntity[]> = signal<RentalEntity[]>(null);
   #selectedRentalId: WritableSignal<number> = signal<number>(null);
 
   fetchRentals() {
     this.#httpClient.get('/rentals/getAllRentals').subscribe({
-      next: (data) => {
-        console.log('Data received:', data);
+      next: (data: RentalEntity[]) => {
+        this.#rentals.set(data);
+      },
+      error: (error) => {
+        this.#toastrService.success(`Error fetching rentals \n ${error}`);
+      },
+    });
+  }
+
+  createRental(rentalEntity: RentalEntity) {
+    this.#httpClient.post('/rentals/createRentals', rentalEntity).subscribe({
+      next: () => {
+        this.#toastrService.success('Rental created successfully');
       },
       error: (error) => {
         console.error('Error:', error);
       },
       complete: () => {
-        console.log('Request completed');
+        this.fetchRentals();
       },
     });
+  }
+
+  updateRental(id: number, rentalEntity: RentalEntity) {
+    this.#httpClient
+      .put(`/rentals/updateRentals/${id}`, rentalEntity)
+      .subscribe({
+        next: () => {
+          this.#toastrService.success('Rental updated successfully');
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        },
+        complete: () => {
+          this.fetchRentals();
+        },
+      });
   }
 
   getRentals(): Signal<RentalEntity[]> {
     return this.#rentals.asReadonly();
   }
 
-  selectRentalId(rentalId: number) {
+  selectRentalId(rentalId: number): void {
     this.#selectedRentalId.set(rentalId);
   }
 

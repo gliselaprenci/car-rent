@@ -10,12 +10,12 @@
     <div id="collapseRentals" class="accordion-collapse collapse" aria-labelledby="rentalLabel"
          data-bs-parent="#rentalsAccordion">
       <div class="accordion-body">
-        <form [formGroup]="rentalForm">
+        <form [formGroup]="rentalForm" (submit)="handleRentalFormSubmit()">
           <div class="d-flex gap-5 align-items-center">
             @if (rentalEntity) {
               <div class="mb-3">
-                <label for="id" class="form-label">ID</label>
-                <input type="number" class="form-control" id="id" disabled formControlName="id">
+                <label for="rental_id" class="form-label">ID</label>
+                <input type="number" class="form-control" id="rental_id" disabled formControlName="rental_id">
               </div>
             }
             <div class="mb-3">
@@ -30,10 +30,13 @@
               <label for="owner" class="form-label">Owner</label>
               <input type="text" class="form-control" id="owner" formControlName="owner">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 d-flex gap-3">
               <button type="submit" class="btn btn-primary">
                 {{ !!rentalEntity ? 'Update Rental' : 'Create Rental' }}
               </button>
+              @if (rentalEntity) {
+                <button class="btn btn-secondary" (click)="clearRentalEntity()">Clear Form</button>
+              }
             </div>
           </div>
         </form>
