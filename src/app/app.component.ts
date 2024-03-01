@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BranchesService } from './branches/branches.service';
+import { RentalsService } from './rentals/rentals.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +10,9 @@ import { BranchesService } from './branches/branches.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  #branchesService: BranchesService = inject(BranchesService);
+  #rentalsService: RentalsService = inject(RentalsService);
 
   ngOnInit(): void {
-    this.#branchesService.fetchBranches();
+    this.#rentalsService.fetchRentals();
   }
 }

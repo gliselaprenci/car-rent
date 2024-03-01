@@ -1,0 +1,8 @@
+<label for="status" class="form-label">Select Rental</label>
+<select class="form-select" id="status" [ngModel]="selectedRental()" (ngModelChange)="handleRentalChange($event)">
+  @for (rental of rentals(); track rental.id) {
+    <option [value]="rental.id"
+            [selected]="selectedRental() === rental.id">{{ rental.name + " " + rental.owner }}
+    </option>
+  }
+</select>

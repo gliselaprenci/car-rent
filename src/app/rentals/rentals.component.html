@@ -1,0 +1,22 @@
+<h1 class="mb-3">Rentals</h1>
+<app-rentals-form></app-rentals-form>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Owner</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (rental of rentals(); track rental.id) {
+      <tr>
+        <td>{{ rental.id }}</td>
+        <td>{{ rental.name }}</td>
+        <td>{{ rental.email }}</td>
+        <td>{{ rental.owner }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

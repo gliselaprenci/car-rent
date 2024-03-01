@@ -4,8 +4,8 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { environment } from '../../../environments/environment';
 import {
   faCar,
-  faCircleNodes,
-  faUser,
+  faCircleNodes, faLocationDot,
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
 import { SidebarItem } from './sidebar.types';
 import { LayoutService } from '../layout.service';
@@ -39,17 +39,23 @@ export class SidebarComponent {
     {
       id: 1,
       icon: faCircleNodes,
+      label: 'Rentals',
+      route: AppRoutes.Rentals,
+    },
+    {
+      id: 2,
+      icon: faLocationDot,
       label: 'Branches',
       route: AppRoutes.Branches,
     },
     {
-      id: 2,
+      id: 3,
       icon: faCar,
       label: 'Cars',
       route: AppRoutes.Cars,
     },
     {
-      id: 2,
+      id: 4,
       icon: faUser,
       label: 'Customers',
       route: AppRoutes.Customers,

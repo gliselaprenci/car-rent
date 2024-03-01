@@ -1,5 +1,10 @@
 <nav class='navbar navbar-expand-sm navbar-dark bg-transparent px-3'>
-  <app-branch-select></app-branch-select>
+  <div class="d-flex gap-3">
+    <app-rental-select></app-rental-select>
+    @if (selectedRentalId()) {
+      <app-branch-select></app-branch-select>
+    }
+  </div>
   @if (!sidebarOpen()) {
     <div class="sidebar-application-name">
       <h1>{{ environment.applicationName }}</h1>
