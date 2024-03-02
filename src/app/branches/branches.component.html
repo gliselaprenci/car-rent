@@ -14,11 +14,6 @@
         <td>{{ branch.branch_id }}</td>
         <td>{{ branch.address }}</td>
         <td>{{ branch.city }}</td>
-        <td class="text-end" (click)="deleteBranch(branch)">
-          <button class="btn btn-sm btn-danger">
-            <fa-icon [icon]="faTrash"></fa-icon>
-          </button>
-        </td>
       </tr>
     }
   </tbody>

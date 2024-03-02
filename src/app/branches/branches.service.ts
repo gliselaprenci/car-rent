@@ -41,7 +41,7 @@ export class BranchesService {
           this.#branches.set(data as BranchEntity[]);
         },
         error: (error) => {
-          this.#toastrService.error(error);
+          this.#toastrService.error(error.message);
         },
       });
   }
@@ -54,7 +54,7 @@ export class BranchesService {
           this.#toastrService.success('Branch created successfully');
         },
         error: (error) => {
-          this.#toastrService.error(error);
+          this.#toastrService.error(error.message);
         },
         complete: () => {
           this.fetchBranches();
@@ -70,23 +70,7 @@ export class BranchesService {
           this.#toastrService.success('Branch updated successfully');
         },
         error: (error) => {
-          this.#toastrService.error(error);
-        },
-        complete: () => {
-          this.fetchBranches();
-        },
-      });
-  }
-
-  deleteBranch(branchEntity: BranchEntity) {
-    this.#httpClient
-      .delete(`/branches/deleteBranches/${branchEntity.branch_id}`)
-      .subscribe({
-        next: () => {
-          this.#toastrService.success('Branch deleted successfully');
-        },
-        error: (error) => {
-          this.#toastrService.error(error);
+          this.#toastrService.error(error.message);
         },
         complete: () => {
           this.fetchBranches();

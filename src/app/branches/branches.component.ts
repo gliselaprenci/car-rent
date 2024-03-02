@@ -2,7 +2,6 @@ import { Component, inject, Signal } from '@angular/core';
 import { BranchesFormComponent } from './branches-form/branches-form.component';
 import { BranchesService } from './branches.service';
 import { BranchEntity } from './branches.types';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -24,10 +23,4 @@ export class BranchesComponent {
   clearBranchEntity(): void {
     this.branchEntity = null;
   }
-
-  deleteBranch(branchEntity: BranchEntity): void {
-    this.#branchesService.deleteBranch(branchEntity);
-  }
-
-  protected readonly faTrash = faTrash;
 }

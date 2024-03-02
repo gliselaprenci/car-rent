@@ -1,19 +1,19 @@
 <h1 class="mb-3">Customers</h1>
-<app-customers-form></app-customers-form>
+<app-customers-form [customerEntity]="customerEntity" (clearCustomerEntity)="clearCustomerEntity()"></app-customers-form>
 <table class="table table-striped">
   <thead>
   <tr>
-    <th>ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Address</th>
+    <th scope="col">ID</th>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Address</th>
   </tr>
   </thead>
   <tbody>
-    @for (customer of customers(); track customer.customer_id) {
-      <tr>
-        <td>{{ customer.customer_id }}</td>
+    @for (customer of customers(); track customer.costumer_id) {
+      <tr (click)="selectCustomerEntity(customer)">
+        <td>{{ customer.costumer_id }}</td>
         <td>{{ customer.firstName }}</td>
         <td>{{ customer.lastName }}</td>
         <td>{{ customer.email }}</td>

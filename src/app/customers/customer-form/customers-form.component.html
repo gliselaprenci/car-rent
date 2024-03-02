@@ -10,12 +10,12 @@
     <div id="collapseCustomers" class="accordion-collapse collapse" aria-labelledby="branchLabel"
          data-bs-parent="#customersAccordion">
       <div class="accordion-body">
-        <form [formGroup]="branchForm">
+        <form [formGroup]="customerForm" (submit)="handleCustomerFormSubmit()">
           <div class="d-flex gap-5 align-items-center">
             @if (customerEntity) {
               <div class="mb-3">
-                <label for="id" class="form-label">ID</label>
-                <input type="number" class="form-control" id="id" disabled formControlName="id">
+                <label for="costumer_id" class="form-label">ID</label>
+                <input type="number" class="form-control" id="costumer_id" formControlName="costumer_id">
               </div>
             }
             <div class="mb-3">
@@ -35,9 +35,21 @@
               <input type="text" class="form-control" id="address" formControlName="address">
             </div>
             <div class="mb-3">
+              <label for="branch_id" class="form-label">Branch</label>
+              <select class="form-select" id="branch_id" formControlName="branch_id">
+                <option [value]="null">-</option>
+                @for (branch of branches(); track branch.branch_id) {
+                  <option [value]="branch.branch_id">{{ branch.address + " " + branch.city }}</option>
+                }
+              </select>
+            </div>
+            <div class="mb-3 d-flex gap-3">
               <button type="submit" class="btn btn-primary">
                 {{ !!customerEntity ? 'Update Customer' : 'Create Customer' }}
               </button>
+              @if (customerEntity) {
+                <button class="btn btn-secondary" (click)="resetCustomerEntity()">Clear Form</button>
+              }
             </div>
           </div>
         </form>

@@ -12,12 +12,11 @@
   </thead>
   <tbody>
     @for (rental of rentals(); track rental.rental_id) {
-      <tr (click)="setRentalEntity(rental)">
-        <td>{{ rental.rental_id }}</td>
-        <td>{{ rental.name }}</td>
-        <td>{{ rental.email }}</td>
-        <td>{{ rental.owner }}</td>
-        <td>{{ rental.owner }}</td>
+      <tr>
+        <td (click)="setRentalEntity(rental)">{{ rental.rental_id }}</td>
+        <td (click)="setRentalEntity(rental)">{{ rental.name }}</td>
+        <td (click)="setRentalEntity(rental)">{{ rental.email }}</td>
+        <td (click)="setRentalEntity(rental)">{{ rental.owner }}</td>
         <td class="text-end" (click)="deleteRental(rental)">
           <button class="btn btn-sm btn-danger">
             <fa-icon [icon]="faTrash"></fa-icon>

@@ -5,6 +5,7 @@ import { RentalsService } from './rentals.service';
 import { RentalEntity } from './rentals.types';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { BranchesService } from '../branches/branches.service';
 
 @Component({
   selector: 'app-rentals',
@@ -15,6 +16,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class RentalsComponent {
   #rentalsService: RentalsService = inject(RentalsService);
+  #branchesService: BranchesService = inject(BranchesService);
   rentals: Signal<RentalEntity[]> = this.#rentalsService.getRentals();
   rentalEntity: RentalEntity;
 
@@ -24,6 +26,7 @@ export class RentalsComponent {
 
   deleteRental(rentalEntity: RentalEntity): void {
     this.#rentalsService.deleteRental(rentalEntity);
+    this.#branchesService.selectBranchId(null);
   }
 
   protected readonly faTrash = faTrash;
