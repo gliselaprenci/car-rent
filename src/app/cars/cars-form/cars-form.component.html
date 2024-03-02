@@ -10,50 +10,83 @@
     <div id="collapseCars" class="accordion-collapse collapse" aria-labelledby="branchLabel"
          data-bs-parent="#carsAccordion">
       <div class="accordion-body">
-        <form [formGroup]="carForm">
-          <div class="d-flex gap-5 align-items-center">
-            @if (carEntity) {
+        <form [formGroup]="carForm" (submit)="handleCarFormSubmit()">
+          <div class="d-flex flex-column gap-2">
+            <div class="d-flex gap-5 align-items-center">
+              @if (carEntity) {
+                <div class="mb-3">
+                  <label for="car_id" class="form-label">ID</label>
+                  <input type="number" class="form-control" id="car_id" formControlName="car_id">
+                </div>
+              }
               <div class="mb-3">
-                <label for="id" class="form-label">ID</label>
-                <input type="number" class="form-control" id="id" disabled formControlName="id">
+                <label for="brand" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="brand" formControlName="brand">
               </div>
-            }
-            <div class="mb-3">
-              <label for="brand" class="form-label">Brand</label>
-              <input type="text" class="form-control" id="brand" formControlName="brand">
+              <div class="mb-3">
+                <label for="model" class="form-label">Model</label>
+                <input type="text" class="form-control" id="model" formControlName="model">
+              </div>
+              <div class="mb-3">
+                <label for="year" class="form-label">Year</label>
+                <input type="number" class="form-control" id="year" formControlName="year">
+              </div>
+              <div class="mb-3">
+                <label for="color" class="form-label">Color</label>
+                <input type="text" class="form-control" id="color" formControlName="color">
+              </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" id="status" formControlName="status">
+                  <option [value]="CarStatus.AVAILABLE"
+                          [selected]="status.value === CarStatus.AVAILABLE">{{ CarStatus.AVAILABLE }}
+                  <option [value]="CarStatus.UNAVAILABLE"
+                          [selected]="status.value === CarStatus.UNAVAILABLE">{{ CarStatus.UNAVAILABLE }}
+                  <option [value]="CarStatus.BOOKED"
+                          [selected]="status.value === CarStatus.BOOKED">{{ CarStatus.BOOKED }}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="rental_per_day" class="form-label">Rentals Per Day</label>
+                <input type="number" class="form-control" id="rental_per_day" formControlName="rental_per_day">
+              </div>
+              <div class="mb-3">
+                <label for="branch_id" class="form-label">Branch</label>
+                <select class="form-select" id="branch_id" formControlName="branch_id">
+                  <option [value]="null">-</option>
+                  @for (branch of branches(); track branch.branch_id) {
+                    <option [value]="branch.branch_id">{{ branch.address + " " + branch.city }}</option>
+                  }
+                </select>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <button type="submit" class="btn btn-primary">
+                  {{ !!carEntity ? 'Update Car' : 'Create Car' }}
+                </button>
+                @if (carEntity) {
+                  <button class="btn btn-secondary" (click)="resetCarEntity()">Clear Form</button>
+                }
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="model" class="form-label">Model</label>
-              <input type="text" class="form-control" id="model" formControlName="model">
-            </div>
-            <div class="mb-3">
-              <label for="year" class="form-label">Year</label>
-              <input type="number" class="form-control" id="year" formControlName="year">
-            </div>
-            <div class="mb-3">
-              <label for="color" class="form-label">Color</label>
-              <input type="text" class="form-control" id="color" formControlName="color">
-            </div>
-            <div class="mb-3">
-              <label for="status" class="form-label">Status</label>
-              <select class="form-select" id="status" formControlName="status">
-                <option [value]="CarStatus.AVAILABLE"
-                        [selected]="status.value === CarStatus.AVAILABLE">{{ CarStatus.AVAILABLE }}
-                <option [value]="CarStatus.UNAVAILABLE"
-                        [selected]="status.value === CarStatus.UNAVAILABLE">{{ CarStatus.UNAVAILABLE }}
-                <option [value]="CarStatus.BOOKED"
-                        [selected]="status.value === CarStatus.BOOKED">{{ CarStatus.BOOKED }}
-                </option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="rental_per_day" class="form-label">Rentals Per Day</label>
-              <input type="number" class="form-control" id="rental_per_day" formControlName="rental_per_day">
-            </div>
-            <div class="mb-3">
-              <button type="submit" class="btn btn-primary">
-                {{ !!carEntity ? 'Update Car' : 'Create Car' }}
-              </button>
+            <div class="d-flex gap-5 align-items-center">
+              <div class="mb-3 d-flex flex-column gap-2">
+                <label for="image" class="form-label">Image</label>
+                <input
+                  id='image'
+                  type='file'
+                  accept='image/*'
+                  (change)="fileChangeEvent($event)"
+                />
+                <ng-container *ngIf="imageEntity()">
+                  <button class="btn btn-secondary d-flex justify-content-center align-items-center gap-2"
+                          (click)="resetImage()">
+                    <span>Remove Image</span>
+                    <fa-icon [icon]="faX"></fa-icon>
+                  </button>
+                  <app-image-display [image]="imageEntity()" width="300"></app-image-display>
+                </ng-container>
+              </div>
             </div>
           </div>
         </form>

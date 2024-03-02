@@ -24,7 +24,7 @@ export class RentalsService {
         this.#rentals.set(data);
       },
       error: (error) => {
-        this.#toastrService.success(`Error fetching rentals \n ${error}`);
+        this.#toastrService.error(`Error fetching rentals \n ${error.message}`);
       },
     });
   }

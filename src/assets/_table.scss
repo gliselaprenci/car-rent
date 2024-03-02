@@ -1,6 +1,7 @@
 .table {
   tr {
     td {
+      vertical-align: middle;
       &:hover {
         cursor: pointer;
       }

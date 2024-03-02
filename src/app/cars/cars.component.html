@@ -1,5 +1,5 @@
 <h1 class="mb-3">Cars</h1>
-<app-cars-form></app-cars-form>
+<app-cars-form [carEntity]="carEntity" (clearCarEntity)="clearCarEntity()"></app-cars-form>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -10,18 +10,22 @@
     <th>Color</th>
     <th>Status</th>
     <th>Rental Per Day</th>
+    <th>Image</th>
   </tr>
   </thead>
   <tbody>
-    @for (car of cars(); track car.id) {
-      <tr>
-        <td>{{ car.id }}</td>
+    @for (car of cars(); track car.car_id) {
+      <tr (click)="setCarEntity(car)">
+        <td>{{ car.car_id }}</td>
         <td>{{ car.brand }}</td>
         <td>{{ car.model }}</td>
         <td>{{ car.year }}</td>
         <td>{{ car.color }}</td>
         <td>{{ car.status }}</td>
         <td>{{ car.rental_per_day }}</td>
+        <td>
+          <app-image-display [image]="car.image" width="200" height="200"></app-image-display>
+        </td>
       </tr>
     }
   </tbody>

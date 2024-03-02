@@ -100,7 +100,6 @@ export class BranchesFormComponent implements OnChanges {
     }
 
     this.#rentalsService.selectRentalId(this.branchForm.get('rental_id').value);
-
     this.resetBranchEntity();
   }
 }
