@@ -59,6 +59,22 @@ export class RentalsService {
       });
   }
 
+  deleteRental(rentalEntity: RentalEntity) {
+    this.#httpClient
+      .delete(`/rentals/deleteRentals/${rentalEntity.rental_id}`)
+      .subscribe({
+        next: () => {
+          this.#toastrService.success('Rental deleted successfully');
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        },
+        complete: () => {
+          this.fetchRentals();
+        },
+      });
+  }
+
   getRentals(): Signal<RentalEntity[]> {
     return this.#rentals.asReadonly();
   }

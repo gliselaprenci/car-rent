@@ -18,7 +18,6 @@ export class HttpInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    console.log('intercepting');
     const token = localStorage.getItem('token');
 
     let updateObject: {};

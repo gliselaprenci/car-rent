@@ -1,11 +1,11 @@
 <h1 class="mb-3">Branches</h1>
-<app-branches-form></app-branches-form>
+<app-branches-form [branchEntity]="branchEntity" (clearBranchEntity)="clearBranchEntity()"></app-branches-form>
 <table class="table table-striped">
   <thead>
   <tr>
-    <th>ID</th>
-    <th>Address</th>
-    <th>City</th>
+    <th scope="col">ID</th>
+    <th scope="col">Address</th>
+    <th scope="col">City</th>
   </tr>
   </thead>
   <tbody>
@@ -14,6 +14,11 @@
         <td>{{ branch.branch_id }}</td>
         <td>{{ branch.address }}</td>
         <td>{{ branch.city }}</td>
+        <td class="text-end" (click)="deleteBranch(branch)">
+          <button class="btn btn-sm btn-danger">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
       </tr>
     }
   </tbody>

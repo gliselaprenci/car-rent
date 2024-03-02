@@ -38,26 +38,28 @@ export class BranchesService {
       .get(`/branches/getBranchByRentalId/${this.#rentalId()}`)
       .subscribe({
         next: (data) => {
-          console.log('Data received:', data);
+          this.#branches.set(data as BranchEntity[]);
         },
         error: (error) => {
-          console.error('Error:', error);
+          this.#toastrService.error(error);
         },
       });
   }
 
   createBranch(branchEntity: BranchEntity) {
-    this.#httpClient.post('/branches/createBranches', branchEntity).subscribe({
-      next: () => {
-        this.#toastrService.success('Branch created successfully');
-      },
-      error: (error) => {
-        console.error('Error:', error);
-      },
-      complete: () => {
-        this.fetchBranches();
-      },
-    });
+    this.#httpClient
+      .post(`/branches/createBranches/${branchEntity.rental_id}`, branchEntity)
+      .subscribe({
+        next: () => {
+          this.#toastrService.success('Branch created successfully');
+        },
+        error: (error) => {
+          this.#toastrService.error(error);
+        },
+        complete: () => {
+          this.fetchBranches();
+        },
+      });
   }
 
   updateBranch(id: number, branchEntity: BranchEntity) {
@@ -68,7 +70,23 @@ export class BranchesService {
           this.#toastrService.success('Branch updated successfully');
         },
         error: (error) => {
-          console.error('Error:', error);
+          this.#toastrService.error(error);
+        },
+        complete: () => {
+          this.fetchBranches();
+        },
+      });
+  }
+
+  deleteBranch(branchEntity: BranchEntity) {
+    this.#httpClient
+      .delete(`/branches/deleteBranches/${branchEntity.branch_id}`)
+      .subscribe({
+        next: () => {
+          this.#toastrService.success('Branch deleted successfully');
+        },
+        error: (error) => {
+          this.#toastrService.error(error);
         },
         complete: () => {
           this.fetchBranches();

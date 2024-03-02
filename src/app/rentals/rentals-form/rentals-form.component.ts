@@ -3,7 +3,6 @@ import {
   inject,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import {
@@ -51,6 +50,7 @@ export class RentalsFormComponent implements OnChanges {
 
   clearRentalEntity() {
     this.rentalEntity = null;
+    this.rentalForm.reset();
   }
 
   handleRentalFormSubmit() {

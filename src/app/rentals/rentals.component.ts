@@ -3,11 +3,13 @@ import { BranchesFormComponent } from '../branches/branches-form/branches-form.c
 import { RentalsFormComponent } from './rentals-form/rentals-form.component';
 import { RentalsService } from './rentals.service';
 import { RentalEntity } from './rentals.types';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rentals',
   standalone: true,
-  imports: [BranchesFormComponent, RentalsFormComponent],
+  imports: [BranchesFormComponent, RentalsFormComponent, FaIconComponent],
   templateUrl: './rentals.component.html',
   styleUrl: './rentals.component.scss',
 })
@@ -19,4 +21,10 @@ export class RentalsComponent {
   setRentalEntity(rentalEntity: RentalEntity): void {
     this.rentalEntity = rentalEntity;
   }
+
+  deleteRental(rentalEntity: RentalEntity): void {
+    this.#rentalsService.deleteRental(rentalEntity);
+  }
+
+  protected readonly faTrash = faTrash;
 }
