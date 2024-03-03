@@ -9,6 +9,7 @@ export enum AppRoutes {
   Cars = 'cars',
   Customers = 'customers',
   CarRentals = 'car-rentals',
+  Reservations = 'reservations',
 }
 
 export const routes: Routes = [
@@ -40,6 +41,11 @@ export const routes: Routes = [
         path: AppRoutes.Customers,
         loadComponent: () =>
           import('./customers/customers.component').then((c) => c.CustomersComponent),
+      },
+      {
+        path: AppRoutes.Reservations,
+        loadComponent: () =>
+          import('./reservations/reservations.component').then((c) => c.ReservationsComponent),
       },
     ],
   },

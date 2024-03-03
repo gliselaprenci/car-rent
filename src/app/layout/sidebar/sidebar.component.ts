@@ -3,10 +3,10 @@ import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { environment } from '../../../environments/environment';
 import {
-  faCar,
+  faCar, faCheckToSlot,
   faCircleNodes,
   faLocationDot,
-  faUser,
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
 import { SidebarItem } from './sidebar.types';
 import { LayoutService } from '../layout.service';
@@ -72,6 +72,13 @@ export class SidebarComponent {
       label: 'Car Rentals',
       route: AppRoutes.CarRentals,
       adminOnly: false,
+    },
+    {
+      id: 6,
+      icon: faCheckToSlot,
+      label: 'Reservations',
+      route: AppRoutes.Reservations,
+      adminOnly: true,
     },
   ];
   protected readonly environment = environment;

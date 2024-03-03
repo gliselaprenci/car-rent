@@ -1,0 +1,23 @@
+<h1 class="mb-3">Reservations</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Reserved by</th>
+    <th scope="col">Start</th>
+    <th scope="col">End</th>
+    <th scope="col">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (reservation of reservations(); track reservation.reservation_id) {
+      <tr>
+        <td>{{ reservation.reservation_id }}</td>
+        <td>{{ reservation.reservedBy }}</td>
+        <td>{{ formatDateToHumanReadable(reservation.start_date) }}</td>
+        <td>{{ formatDateToHumanReadable(reservation.end_date) }}</td>
+        <td>{{ reservation.amount }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

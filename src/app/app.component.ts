@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { RentalsService } from './rentals/rentals.service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { LayoutService } from './layout/layout.service';
+import { ReservationsService } from './reservations/reservations.service';
 
 @UntilDestroy()
 @Component({
@@ -14,6 +15,7 @@ import { LayoutService } from './layout/layout.service';
 })
 export class AppComponent implements OnInit {
   #rentalsService: RentalsService = inject(RentalsService);
+  #reservationsService: ReservationsService = inject(ReservationsService);
   #layoutService: LayoutService = inject(LayoutService);
   #router: Router = inject(Router);
 
@@ -27,5 +29,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.#rentalsService.fetchRentals();
+    this.#reservationsService.fetchReservations();
   }
 }

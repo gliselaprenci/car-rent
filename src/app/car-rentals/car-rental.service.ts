@@ -4,6 +4,7 @@ import { CarEntity } from '../cars/cars.types';
 import { CustomerEntity } from '../customers/customer.types';
 import { ToastrService } from 'ngx-toastr';
 import { CarsService } from '../cars/cars.service';
+import { ReservationsService } from '../reservations/reservations.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { CarsService } from '../cars/cars.service';
 export class CarRentalService {
   #httpClient: HttpClient = inject(HttpClient);
   #carsService: CarsService = inject(CarsService);
+  #reservationsService: ReservationsService = inject(ReservationsService);
   #toastrService: ToastrService = inject(ToastrService);
 
   createReservation(carEntity: CarEntity, customer: CustomerEntity, dates) {
@@ -29,6 +31,7 @@ export class CarRentalService {
         },
         complete: () => {
           this.#carsService.fetchCars();
+          this.#reservationsService.fetchReservations();
         }
       });
   }
