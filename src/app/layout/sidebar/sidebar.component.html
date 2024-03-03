@@ -4,12 +4,14 @@
   </div>
   <div class='sidebar-list-container'>
     @for (item of sidebarItem; track item.id) {
-      <div class="sidebar-list-item" [class.active]="item.route === activeParentUrl" [routerLink]="item.route">
-        <fa-icon [icon]="item.icon"></fa-icon>
-        @if (sidebarOpen()) {
-          <span>{{ item.label }}</span>
-        }
-      </div>
+      <ng-container *ngIf="(item.adminOnly && isAdmin() || !item.adminOnly && !isAdmin())">
+        <div class="sidebar-list-item" [class.active]="item.route === activeParentUrl" [routerLink]="item.route">
+          <fa-icon [icon]="item.icon"></fa-icon>
+          @if (sidebarOpen()) {
+            <span>{{ item.label }}</span>
+          }
+        </div>
+      </ng-container>
     }
   </div>
 </div>

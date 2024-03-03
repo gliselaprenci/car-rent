@@ -1,0 +1,38 @@
+<h1 class="mb-3">Cars</h1>
+<div class="row justify-content-center p-3 gap-2 car-rental-container">
+  @for (car of cars(); track car.car_id) {
+    @if (car.status === CarStatus.AVAILABLE) {
+      <div class="col-3 car-rental-card bg-white">
+        <div class="d-flex flex-column gap-2 w-100">
+          <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex flex-column gap-2">
+              <span class="fw-bold">$ {{ car.rental_per_day }}/day</span>
+              <div class="d-flex flex-column">
+                <span>{{ car.brand }}</span>
+                <span>{{ car.model }}</span>
+                <span>{{ car.color }}</span>
+              </div>
+            </div>
+            <div>
+              <app-image-display [image]="car.image" width="200" height="300"></app-image-display>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <div>
+              <label>Start</label>
+              <input type="date" [ngModel]="startDate" (ngModelChange)="startDateChange($event)" />
+            </div>
+            <div>
+              <label>End</label>
+              <input type="date" [ngModel]="endDate" (ngModelChange)="endDateChange($event)" />
+            </div>
+            <button class="btn btn-success" (click)="rentCar(car)">Rent</button>
+          </div>
+          @if (hasDateErrors) {
+            <span class="text-danger">End date cannot be before start date</span>
+          }
+        </div>
+      </div>
+    }
+  }
+</div>

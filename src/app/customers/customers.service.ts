@@ -20,6 +20,7 @@ export class CustomersService {
   #toastrService: ToastrService = inject(ToastrService);
   #customers: WritableSignal<CustomerEntity[]> = signal<CustomerEntity[]>(null);
   branchId: Signal<number> = this.#branchesService.getSelectedBranchId();
+  #randomCustomer: WritableSignal<CustomerEntity> = signal(null);
 
   constructor() {
     effect(() => {
@@ -30,6 +31,17 @@ export class CustomersService {
 
       this.fetchCustomers();
     });
+
+    effect(
+      () => {
+        return this.#randomCustomer.set(
+          this.#customers()?.at(
+            this.randomInteger(0, this.#customers()?.length - 1),
+          ),
+        );
+      },
+      { allowSignalWrites: true },
+    );
   }
 
   fetchCustomers() {
@@ -91,5 +103,13 @@ export class CustomersService {
 
   getCustomers(): Signal<CustomerEntity[]> {
     return this.#customers.asReadonly();
+  }
+
+  getRandomCustomer(): Signal<CustomerEntity> {
+    return this.#randomCustomer;
+  }
+
+  randomInteger(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

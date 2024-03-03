@@ -5,5 +5,6 @@ export type SidebarItem = {
   id: number,
   icon: IconProp,
   label: string,
-  route: AppRoutes
+  route: AppRoutes,
+  adminOnly: boolean
 }
