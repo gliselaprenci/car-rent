@@ -1,16 +1,16 @@
 <h1 class="mb-3">Cars</h1>
 <div class="row justify-content-center p-3 gap-2 car-rental-container">
-  @for (car of cars(); track car.car_id) {
+  @for (car of cars(); track car.carId) {
     @if (car.status === CarStatus.AVAILABLE) {
       <div class="col-3 car-rental-card bg-white">
         <div class="d-flex flex-column gap-2 w-100">
           <div class="d-flex align-items-center justify-content-between gap-2">
             <div class="d-flex flex-column gap-2">
-              <span class="fw-bold">$ {{ car.rental_per_day }}/day</span>
+              <span class="fw-bold">$ {{ car.rentalPerDay }}/day</span>
               <div class="d-flex flex-column">
                 <span>{{ car.brand }}</span>
                 <span>{{ car.model }}</span>
-                <span>{{ car.color }}</span>
+                <span>{{ car.colour }}</span>
               </div>
             </div>
             <div>

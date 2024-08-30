@@ -16,7 +16,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CustomerEntity } from '../customer.types';
+import { UserEntity } from '../customer.types';
 import { BranchesService } from '../../branches/branches.service';
 import { BranchEntity } from '../../branches/branches.types';
 import { ToastrService } from 'ngx-toastr';
@@ -31,7 +31,7 @@ import { CustomersService } from '../customers.service';
   styleUrl: './customers-form.component.scss',
 })
 export class CustomersFormComponent implements OnChanges {
-  @Input() customerEntity: CustomerEntity;
+  @Input() customerEntity: UserEntity;
   @Output() clearCustomerEntity: EventEmitter<any> = new EventEmitter<any>();
   #formBuilder: FormBuilder = inject(FormBuilder);
   #customersService: CustomersService = inject(CustomersService);
@@ -47,29 +47,29 @@ export class CustomersFormComponent implements OnChanges {
     lastName: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     address: ['', [Validators.required]],
-    branch_id: ['', [Validators.required]],
+    branchId: ['', [Validators.required]],
   });
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes?.customerEntity?.currentValue) {
-      this.customerForm.addControl('costumer_id', new FormControl(''));
-      this.customerForm.get('costumer_id').disable();
+      this.customerForm.addControl('userId', new FormControl(''));
+      this.customerForm.get('userId').disable();
       this.customerForm.patchValue(this.customerEntity);
 
       const branchIdControl: AbstractControl =
-        this.customerForm.get('branch_id');
+        this.customerForm.get('branchId');
       branchIdControl.setValue(this.selectedBranchId());
       branchIdControl.disable();
     } else {
-      this.customerForm.get('branch_id').enable();
-      this.customerForm.removeControl('costumer_id');
+      this.customerForm.get('branchId').enable();
+      this.customerForm.removeControl('userId');
     }
   }
 
   resetCustomerEntity() {
     this.clearCustomerEntity.emit();
     this.customerForm.reset();
-    this.customerForm.get('branch_id').enable();
+    this.customerForm.get('branchId').enable();
   }
 
   handleCustomerFormSubmit() {
@@ -87,17 +87,17 @@ export class CustomersFormComponent implements OnChanges {
 
     if (hasErrors) return;
 
-    const customerEntity: CustomerEntity = {
+    const customerEntity: UserEntity = {
       firstName: this.customerForm.get('firstName').value,
       lastName: this.customerForm.get('lastName').value,
       email: this.customerForm.get('email').value,
       address: this.customerForm.get('address').value,
-      branch_id: this.customerForm.get('branch_id').value,
+      branchId: this.customerForm.get('branchId').value,
     };
 
     if (this.customerEntity) {
       this.#customersService.updateCustomer(
-        this.customerForm.get('costumer_id').value,
+        this.customerForm.get('userId').value,
         customerEntity,
       );
     } else {
@@ -105,7 +105,7 @@ export class CustomersFormComponent implements OnChanges {
     }
 
     this.#branchesService.selectBranchId(
-      this.customerForm.get('branch_id').value,
+      this.customerForm.get('branchId').value,
     );
     this.resetCustomerEntity();
   }

@@ -14,8 +14,8 @@
           <div class="d-flex gap-5 align-items-center">
             @if (branchEntity) {
               <div class="mb-3">
-                <label for="branch_id" class="form-label">ID</label>
-                <input type="number" class="form-control" id="branch_id" formControlName="branch_id">
+                <label for="branchId" class="form-label">ID</label>
+                <input type="number" class="form-control" id="branchId" formControlName="branchId">
               </div>
             }
             <div class="mb-3">
@@ -28,10 +28,10 @@
             </div>
             <div class="mb-3">
               <label for="status" class="form-label">Select Rental</label>
-              <select class="form-select" id="status" formControlName="rental_id">
+              <select class="form-select" id="status" formControlName="rentalId">
                 <option [value]="null">-</option>
-                @for (rental of rentals(); track rental.rental_id) {
-                  <option [value]="rental.rental_id">{{ rental.name + " " + rental.owner }}</option>
+                @for (rental of rentals(); track rental.rentalId) {
+                  <option [value]="rental.rentalId">{{ rental.name + " " + rental.owner }}</option>
                 }
               </select>
             </div>

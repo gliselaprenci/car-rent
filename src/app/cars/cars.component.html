@@ -14,15 +14,15 @@
   </tr>
   </thead>
   <tbody>
-    @for (car of cars(); track car.car_id) {
+    @for (car of cars(); track car.carId) {
       <tr (click)="setCarEntity(car)">
-        <td>{{ car.car_id }}</td>
+        <td>{{ car.carId }}</td>
         <td>{{ car.brand }}</td>
         <td>{{ car.model }}</td>
-        <td>{{ car.year }}</td>
-        <td>{{ car.color }}</td>
+        <td>{{ car.productionYear }}</td>
+        <td>{{ car.colour }}</td>
         <td>{{ car.status }}</td>
-        <td>{{ car.rental_per_day }}</td>
+        <td>{{ car.rentalPerDay }}</td>
         <td>
           <app-image-display [image]="car.image" width="200" height="200"></app-image-display>
         </td>

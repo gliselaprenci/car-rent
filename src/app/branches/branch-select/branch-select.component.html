@@ -1,9 +1,9 @@
 <label for="status" class="form-label">Select Branch</label>
 <select class="form-select" id="status" [ngModel]="selectedBranch()" (ngModelChange)="handleBranchChange($event)">
   <option [value]="null">-</option>
-  @for (branch of branches(); track branch.branch_id) {
-    <option [value]="branch.branch_id"
-            [selected]="selectedBranch() === branch.branch_id">{{ branch.city + " " + branch.address }}
+  @for (branch of branches(); track branch.branchId) {
+    <option [value]="branch.branchId"
+            [selected]="selectedBranch() === branch.branchId">{{ branch.city + " " + branch.address }}
     </option>
   }
 </select>

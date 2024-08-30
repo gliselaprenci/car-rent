@@ -56,43 +56,43 @@ export class CarsFormComponent implements OnChanges {
   carForm: FormGroup = this.#formBuilder.group({
     brand: ['', [Validators.required]],
     model: ['', [Validators.required]],
-    year: ['', [Validators.required]],
-    color: ['', [Validators.required]],
+    productionYear: ['', [Validators.required]],
+    colour: ['', [Validators.required]],
     status: ['', [Validators.required]],
-    rental_per_day: ['', [Validators.required]],
-    branch_id: ['', [Validators.required]],
-    image_id: ['', [Validators.required]],
+    rentalPerDay: ['', [Validators.required]],
+    branchId: ['', [Validators.required]],
+    imageId: ['', [Validators.required]],
   });
 
   constructor() {
     effect(() => {
       if (this.imageEntity()) {
-        this.carForm.get('image_id').setValue(this.imageEntity().id);
+        this.carForm.get('imageId').setValue(this.imageEntity().imageId);
       }
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes?.carEntity?.currentValue) {
-      this.carForm.addControl('car_id', new FormControl(''));
-      this.carForm.get('car_id').disable();
+      this.carForm.addControl('carId', new FormControl(''));
+      this.carForm.get('carId').disable();
       this.carForm.patchValue(this.carEntity);
 
-      const branchIdControl: AbstractControl = this.carForm.get('branch_id');
+      const branchIdControl: AbstractControl = this.carForm.get('branchId');
       branchIdControl.setValue(this.selectedBranchId());
       branchIdControl.disable();
-      this.carForm.get('image_id').setValue(this.carEntity.image.id);
+      this.carForm.get('imageId').setValue(this.carEntity.image.imageId);
       this.#imageService.setUploadedImage(this.carEntity.image);
     } else {
-      this.carForm.get('branch_id').enable();
-      this.carForm.removeControl('car_id');
+      this.carForm.get('branchId').enable();
+      this.carForm.removeControl('carId');
     }
   }
 
   resetCarEntity() {
     this.clearCarEntity.emit();
     this.carForm.reset();
-    this.carForm.get('branch_id').enable();
+    this.carForm.get('branchId').enable();
     this.#imageService.setUploadedImage(null);
     this.resetImage();
   }
@@ -115,23 +115,23 @@ export class CarsFormComponent implements OnChanges {
     const carEntity: CarEntity = {
       brand: this.carForm.get('brand').value,
       model: this.carForm.get('model').value,
-      year: this.carForm.get('year').value,
-      color: this.carForm.get('color').value,
+      productionYear: this.carForm.get('productionYear').value,
+      colour: this.carForm.get('colour').value,
       status: this.carForm.get('status').value,
-      rental_per_day: this.carForm.get('rental_per_day').value,
-      branch_id: this.carForm.get('branch_id').value,
+      rentalPerDay: this.carForm.get('rentalPerDay').value,
+      branchId: this.carForm.get('branchId').value,
       image: {
-        id: this.carForm.get('image_id').value,
+        imageId: this.carForm.get('imageId').value,
       },
     };
 
     if (this.carEntity) {
-      this.#carsService.updateCar(this.carForm.get('car_id').value, carEntity);
+      this.#carsService.updateCar(this.carForm.get('carId').value, carEntity);
     } else {
       this.#carsService.createCar(carEntity);
     }
 
-    this.#branchesService.selectBranchId(this.carForm.get('branch_id').value);
+    this.#branchesService.selectBranchId(this.carForm.get('branchId').value);
     this.resetCarEntity();
   }
 

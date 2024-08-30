@@ -1,15 +1,15 @@
 import { ImageEntity } from '../common/image-display/image-display.types';
 
 export type CarEntity = {
-  car_id?: number,
+  carId?: number,
   brand: string,
   model: string,
-  year: number,
-  color: string,
+  productionYear: number,
+  colour: string,
   status: CarStatus,
-  rental_per_day: number,
-  branch_id: string,
-  image_id?: string,
+  rentalPerDay: number,
+  branchId: string,
+  imageId?: string,
   image?: ImageEntity
 }
 

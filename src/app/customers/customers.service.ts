@@ -9,7 +9,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { BranchesService } from '../branches/branches.service';
 import { ToastrService } from 'ngx-toastr';
-import { CustomerEntity } from './customer.types';
+import { UserEntity } from './customer.types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +18,9 @@ export class CustomersService {
   #httpClient: HttpClient = inject(HttpClient);
   #branchesService: BranchesService = inject(BranchesService);
   #toastrService: ToastrService = inject(ToastrService);
-  #customers: WritableSignal<CustomerEntity[]> = signal<CustomerEntity[]>(null);
+  #customers: WritableSignal<UserEntity[]> = signal<UserEntity[]>(null);
   branchId: Signal<number> = this.#branchesService.getSelectedBranchId();
-  #randomCustomer: WritableSignal<CustomerEntity> = signal(null);
+  #randomCustomer: WritableSignal<UserEntity> = signal(null);
 
   constructor() {
     effect(() => {
@@ -51,10 +51,10 @@ export class CustomersService {
     }
 
     this.#httpClient
-      .get(`/customers/getCustomerByBranchId/${this.branchId()}`)
+      .get(`/users/getUserByBranchId/${this.branchId()}`)
       .subscribe({
         next: (data) => {
-          this.#customers.set(data as CustomerEntity[]);
+          this.#customers.set(data as UserEntity[]);
           console.log('Data received:', data);
         },
         error: (error) => {
@@ -66,10 +66,10 @@ export class CustomersService {
       });
   }
 
-  createCustomer(customerEntity: CustomerEntity) {
+  createCustomer(customerEntity: UserEntity) {
     this.#httpClient
       .post(
-        `/customers/createCustomer/${customerEntity.branch_id}`,
+        `/users/createUser/${customerEntity.branchId}`,
         customerEntity,
       )
       .subscribe({
@@ -85,9 +85,9 @@ export class CustomersService {
       });
   }
 
-  updateCustomer(id: number, customerEntity: CustomerEntity) {
+  updateCustomer(userId: number, customerEntity: UserEntity) {
     this.#httpClient
-      .put(`/customers/updateCustomer/${id}`, customerEntity)
+      .put(`/users/updateUser/${userId}`, customerEntity)
       .subscribe({
         next: () => {
           this.#toastrService.success('Customer updated successfully');
@@ -101,11 +101,11 @@ export class CustomersService {
       });
   }
 
-  getCustomers(): Signal<CustomerEntity[]> {
+  getCustomers(): Signal<UserEntity[]> {
     return this.#customers.asReadonly();
   }
 
-  getRandomCustomer(): Signal<CustomerEntity> {
+  getRandomCustomer(): Signal<UserEntity> {
     return this.#randomCustomer;
   }
 

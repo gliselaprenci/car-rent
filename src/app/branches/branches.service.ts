@@ -48,7 +48,7 @@ export class BranchesService {
 
   createBranch(branchEntity: BranchEntity) {
     this.#httpClient
-      .post(`/branches/createBranches/${branchEntity.rental_id}`, branchEntity)
+      .post(`/branches/createBranch/${branchEntity.rentalId}`, branchEntity)
       .subscribe({
         next: () => {
           this.#toastrService.success('Branch created successfully');

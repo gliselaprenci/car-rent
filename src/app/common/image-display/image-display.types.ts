@@ -1,5 +1,5 @@
 export type ImageEntity = {
-  id?: string;
+  imageId?: string;
   url?: string;
   fileName?: string;
   originalFileName?: string;

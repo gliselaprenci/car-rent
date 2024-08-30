@@ -8,6 +8,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { RentalEntity } from './rentals.types';
 import { ToastrService } from 'ngx-toastr';
+import {BranchEntity} from "../branches/branches.types";
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class RentalsService {
   }
 
   createRental(rentalEntity: RentalEntity) {
-    this.#httpClient.post('/rentals/createRentals', rentalEntity).subscribe({
+    this.#httpClient.post('/rentals/createRental', rentalEntity).subscribe({
       next: () => {
         this.#toastrService.success('Rental created successfully');
       },
@@ -61,7 +62,7 @@ export class RentalsService {
 
   deleteRental(rentalEntity: RentalEntity) {
     this.#httpClient
-      .delete(`/rentals/deleteRentals/${rentalEntity.rental_id}`)
+      .delete(`/rentals/deleteRentals/${rentalEntity.rentalId}`)
       .subscribe({
         next: () => {
           this.#toastrService.success('Rental deleted successfully');

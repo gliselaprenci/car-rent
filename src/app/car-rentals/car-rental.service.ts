@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CarEntity } from '../cars/cars.types';
-import { CustomerEntity } from '../customers/customer.types';
+import { UserEntity } from '../customers/customer.types';
 import { ToastrService } from 'ngx-toastr';
 import { CarsService } from '../cars/cars.service';
 import { ReservationsService } from '../reservations/reservations.service';
@@ -15,11 +15,11 @@ export class CarRentalService {
   #reservationsService: ReservationsService = inject(ReservationsService);
   #toastrService: ToastrService = inject(ToastrService);
 
-  createReservation(carEntity: CarEntity, customer: CustomerEntity, dates) {
+  createReservation(carEntity: CarEntity, customer: UserEntity, dates) {
     console.log('customer', customer);
     this.#httpClient
       .post(
-        `/reservations/createReservation/car/${carEntity.car_id}/user/${customer.costumer_id}`,
+        `/reservations/createReservation/car/${carEntity.carId}/user/${customer.userId}`,
         dates,
       )
       .subscribe({

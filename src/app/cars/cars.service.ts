@@ -39,7 +39,7 @@ export class CarsService {
     }
 
     this.#httpClient
-      .get(`/cars/getCarByBranchId/${this.branchId()}`)
+      .get(`/cars/getCarsByBranchId/${this.branchId()}`)
       .subscribe({
         next: (data) => {
           this.#cars.set(data as CarEntity[]);
@@ -47,12 +47,15 @@ export class CarsService {
         error: (error) => {
           this.#toastrService.error(error.message);
         },
+        complete: () => {
+          console.log('Request completed');
+        },
       });
   }
 
   createCar(carEntity: CarEntity) {
     this.#httpClient
-      .post(`/cars/addCar/${carEntity.branch_id}`, carEntity)
+      .post(`/cars/createCar/${carEntity.branchId}`, carEntity)
       .subscribe({
         next: () => {
           this.#toastrService.success('Car created successfully');
@@ -66,8 +69,8 @@ export class CarsService {
       });
   }
 
-  updateCar(id: number, carEntity: CarEntity) {
-    this.#httpClient.put(`/cars/updateCar/${id}`, carEntity).subscribe({
+  updateCar(carId: number, carEntity: CarEntity) {
+    this.#httpClient.put(`/cars/updateCar/${carId}`, carEntity).subscribe({
       next: () => {
         this.#toastrService.success('Car updated successfully');
       },

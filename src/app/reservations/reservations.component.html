@@ -10,12 +10,12 @@
   </tr>
   </thead>
   <tbody>
-    @for (reservation of reservations(); track reservation.reservation_id) {
+    @for (reservation of reservations(); track reservation.reservationId) {
       <tr>
-        <td>{{ reservation.reservation_id }}</td>
+        <td>{{ reservation.reservationId }}</td>
         <td>{{ reservation.reservedBy }}</td>
-        <td>{{ formatDateToHumanReadable(reservation.start_date) }}</td>
-        <td>{{ formatDateToHumanReadable(reservation.end_date) }}</td>
+        <td>{{ formatDateToHumanReadable(reservation.startDate) }}</td>
+        <td>{{ formatDateToHumanReadable(reservation.endDate) }}</td>
         <td>{{ reservation.amount }}</td>
       </tr>
     }

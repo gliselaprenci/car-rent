@@ -11,9 +11,9 @@
   </tr>
   </thead>
   <tbody>
-    @for (rental of rentals(); track rental.rental_id) {
+    @for (rental of rentals(); track rental.rentalId) {
       <tr>
-        <td (click)="setRentalEntity(rental)">{{ rental.rental_id }}</td>
+        <td (click)="setRentalEntity(rental)">{{ rental.rentalId }}</td>
         <td (click)="setRentalEntity(rental)">{{ rental.name }}</td>
         <td (click)="setRentalEntity(rental)">{{ rental.email }}</td>
         <td (click)="setRentalEntity(rental)">{{ rental.owner }}</td>

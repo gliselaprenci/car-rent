@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarsService } from '../cars/cars.service';
 import { CarEntity, CarStatus } from '../cars/cars.types';
 import { ImageDisplayComponent } from '../common/image-display/image-display.component';
-import { CustomerEntity } from '../customers/customer.types';
+import { UserEntity } from '../customers/customer.types';
 import { CustomersService } from '../customers/customers.service';
 import { CarRentalService } from './car-rental.service';
 import { CarRentalDates } from './car-rentals.types';
@@ -28,7 +28,7 @@ export class CarRentalsComponent {
   #carRentalService: CarRentalService = inject(CarRentalService);
   #toastrService: ToastrService = inject(ToastrService);
   cars: Signal<CarEntity[]> = this.#carsService.getCars();
-  randomCustomer: Signal<CustomerEntity> =
+  randomCustomer: Signal<UserEntity> =
     this.#customersService.getRandomCustomer();
   startDate: string;
   endDate: string;
@@ -41,8 +41,8 @@ export class CarRentalsComponent {
     }
 
     const dates: CarRentalDates = {
-      start_date: this.startDate,
-      end_date: this.endDate,
+      startDate: this.startDate,
+      endDate: this.endDate,
     };
 
     this.#carRentalService.createReservation(

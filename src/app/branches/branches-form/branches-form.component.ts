@@ -45,28 +45,28 @@ export class BranchesFormComponent implements OnChanges {
   branchForm: FormGroup = this.#formBuilder.group({
     address: ['', [Validators.required]],
     city: ['', [Validators.required]],
-    rental_id: [null, [Validators.required]],
+    rentalId: [null, [Validators.required]],
   });
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!!changes?.branchEntity?.currentValue) {
-      this.branchForm.addControl('branch_id', new FormControl(''));
-      this.branchForm.get('branch_id').disable();
+      this.branchForm.addControl('branchId', new FormControl(''));
+      this.branchForm.get('branchId').disable();
       this.branchForm.patchValue(this.branchEntity);
 
-      const rentalIdControl: AbstractControl = this.branchForm.get('rental_id');
+      const rentalIdControl: AbstractControl = this.branchForm.get('rentalId');
       rentalIdControl.setValue(this.selectedRentalId());
       rentalIdControl.disable();
     } else {
-      this.branchForm.get('rental_id').enable();
-      this.branchForm.removeControl('branch_id');
+      this.branchForm.get('rentalId').enable();
+      this.branchForm.removeControl('branchId');
     }
   }
 
   resetBranchEntity() {
     this.clearBranchEntity.emit();
     this.branchForm.reset();
-    this.branchForm.get('rental_id').enable();
+    this.branchForm.get('rentalId').enable();
   }
 
   handleBranchFormSubmit() {
@@ -87,19 +87,19 @@ export class BranchesFormComponent implements OnChanges {
     const branchEntity: BranchEntity = {
       address: this.branchForm.get('address').value,
       city: this.branchForm.get('city').value,
-      rental_id: this.branchForm.get('rental_id').value,
+      rentalId: this.branchForm.get('rentalId').value,
     };
 
     if (this.branchEntity) {
       this.#branchesService.updateBranch(
-        this.branchForm.get('branch_id').value,
+        this.branchForm.get('branchId').value,
         branchEntity,
       );
     } else {
       this.#branchesService.createBranch(branchEntity);
     }
 
-    this.#rentalsService.selectRentalId(this.branchForm.get('rental_id').value);
+    this.#rentalsService.selectRentalId(this.branchForm.get('rentalId').value);
     this.resetBranchEntity();
   }
 }
