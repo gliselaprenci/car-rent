@@ -49,7 +49,7 @@ export class BranchesFormComponent implements OnChanges {
   });
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes?.branchEntity?.currentValue) {
+    if (changes?.branchEntity?.currentValue) {
       this.branchForm.addControl('branchId', new FormControl(''));
       this.branchForm.get('branchId').disable();
       this.branchForm.patchValue(this.branchEntity);

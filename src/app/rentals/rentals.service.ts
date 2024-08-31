@@ -44,9 +44,9 @@ export class RentalsService {
     });
   }
 
-  updateRental(id: number, rentalEntity: RentalEntity) {
+  updateRental(rentalId: number, rentalEntity: RentalEntity) {
     this.#httpClient
-      .put(`/rentals/updateRentals/${id}`, rentalEntity)
+      .put(`/rentals/updateRental/${rentalId}`, rentalEntity)
       .subscribe({
         next: () => {
           this.#toastrService.success('Rental updated successfully');
@@ -62,7 +62,7 @@ export class RentalsService {
 
   deleteRental(rentalEntity: RentalEntity) {
     this.#httpClient
-      .delete(`/rentals/deleteRentals/${rentalEntity.rentalId}`)
+      .delete(`/rentals/deleteRental/${rentalEntity.rentalId}`)
       .subscribe({
         next: () => {
           this.#toastrService.success('Rental deleted successfully');

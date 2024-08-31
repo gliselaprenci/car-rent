@@ -40,11 +40,11 @@ export class RentalsFormComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.rentalEntity?.currentValue !== null) {
-      this.rentalForm.addControl('id', new FormControl(''));
-      this.rentalForm.get('id').disable();
+      this.rentalForm.addControl('rentalId', new FormControl(''));
+      this.rentalForm.get('rentalId').disable();
       this.rentalForm.patchValue(this.rentalEntity);
     } else {
-      this.rentalForm.removeControl('id');
+      this.rentalForm.removeControl('rentalId');
     }
   }
 
@@ -76,7 +76,7 @@ export class RentalsFormComponent implements OnChanges {
 
     if (this.rentalEntity) {
       this.#rentalsService.updateRental(
-        this.rentalForm.get('id').value,
+        this.rentalForm.get('rentalId').value,
         rentalEntity,
       );
     } else {

@@ -62,9 +62,9 @@ export class BranchesService {
       });
   }
 
-  updateBranch(id: number, branchEntity: BranchEntity) {
+  updateBranch(branchId: number, branchEntity: BranchEntity) {
     this.#httpClient
-      .put(`/branches/updateBranches/${id}`, branchEntity)
+      .put(`/branches/updateBranch/${branchId}`, branchEntity)
       .subscribe({
         next: () => {
           this.#toastrService.success('Branch updated successfully');
