@@ -21,6 +21,7 @@ export class ImageService {
     this.#httpClient.post('/image/upload', formData).subscribe({
       next: (data) => {
         this.#uploadedImage.set(data as ImageEntity);
+        console.log('data', data);
       },
       error: (error) => {
         this.#toastrService.error(error.message);

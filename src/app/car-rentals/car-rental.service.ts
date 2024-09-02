@@ -19,7 +19,7 @@ export class CarRentalService {
     console.log('customer', customer);
     this.#httpClient
       .post(
-        `/reservations/createReservation/car/${carEntity.carId}/user/${customer.userId}`,
+        `/reservations/createReservation/${customer.userId}/${carEntity.carId}`,
         dates,
       )
       .subscribe({

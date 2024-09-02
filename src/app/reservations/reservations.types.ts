@@ -5,7 +5,7 @@ export type ReservationEntity = {
   bookingDate: string;
   startDate: string;
   endDate: string;
-  amount: string;
+  totalAmount: string;
   reservedBy: string;
   customerEntity: UserEntity;
   pickup_branchId: string;

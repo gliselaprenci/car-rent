@@ -73,7 +73,7 @@ export class CarsFormComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!!changes?.carEntity?.currentValue) {
+    if (changes?.carEntity?.currentValue) {
       this.carForm.addControl('carId', new FormControl(''));
       this.carForm.get('carId').disable();
       this.carForm.patchValue(this.carEntity);

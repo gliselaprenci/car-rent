@@ -6,7 +6,7 @@
     <th scope="col">Reserved by</th>
     <th scope="col">Start</th>
     <th scope="col">End</th>
-    <th scope="col">Amount</th>
+    <th scope="col">Total Amount</th>
   </tr>
   </thead>
   <tbody>
@@ -16,7 +16,7 @@
         <td>{{ reservation.reservedBy }}</td>
         <td>{{ formatDateToHumanReadable(reservation.startDate) }}</td>
         <td>{{ formatDateToHumanReadable(reservation.endDate) }}</td>
-        <td>{{ reservation.amount }}</td>
+        <td>{{ reservation.totalAmount }}</td>
       </tr>
     }
   </tbody>
